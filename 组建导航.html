@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			.wrap{
+				height: 50px;
+				padding: 0px 20px;
+				line-height: 80px;
+				background: black;
+			}
+			.wrap .logo{
+				width: 30%;
+				height: 80px;
+				
+				background: url(img/logo-galaxy.png) 0 0 no-repeat;
+			}
+			/*.wrap li{
+				color: white;
+				float: left;
+				
+				width: 120px;
+				text-align: center;
+			}
+			.li{
+				
+				width: calc(70%/6);
+			}*/
+			.wrap li{
+				float: left;
+				color: white;
+				line-height: 50px;
+				width: calc(70%/6);
+				text-align: center;
+				cursor: pointer;
+			}
+			 .active{
+				background:blueviolet;
+			}
+			.wrap p{
+				background:#EDEBE9 ;
+				/*height: 416px;*/
+			}
+			.main{
+				padding: 30px;
+				height: 416px;
+				line-height: 30px;
+				text-indent: 30px;
+				background: #EDEBE9;
+			}
+			.footer{
+				height: 80px;
+				background: black;
+				color: #808080;
+				padding: 0 30px;
+				margin-top: 40px;
+				line-height: 80px;
+			}
+			
+			.footer div:nth-child(1){
+				float: left;
+			}
+			.footer div:nth-child(2){
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<my-zujian :goodslist="goodslist"@getcom="getcomname"></my-zujian>
+			<!--<mained></mained>-->
+			<component :is="come"></component>
+			<myfooter :footer="footer"></myfooter>
+		</div>
+				
+			<!--<div class="wrap" v-for="lists in goodslist">
+				<ul>
+					<li class="logo"><img src="img/logo.png"/></li>
+					<li class="li list">网站首页</li>
+					<li class="li">服务范围</li>
+					<li class="li">客户案例</li>
+					<li class="li">关于我们</li>
+					<li class="li">咨询中心</li>
+					<li class="li">联系我们</li>
+				</ul>
+			</div>-->
+			<template id="age">
+				<div class="wrap">
+			 <ul>
+				<li :class="list.lists" v-for="(list,index) in goodslist" @click="change(index)">{{list.name}}</li> 
+						
+					<!--<li class="li active">网站首页</li>
+					<li class="li">服务范围</li>
+					<li class="li">客户案例</li>
+					<li class="li">关于我们</li>
+					<li class="li">咨询中心</li>
+					<li class="li">联系我们</li>-->
+				</ul>
+				</div>
+			</template>
+		<!--<div class="main">
+		  <p>总想第一眼便能看穿，第一人恋人就能是一生。我们追逐太急，生命总是开着各种玩笑，错过就不要在追忆。只要心里有爱，去追，去拼，去远方。
+                年轻的我们总有很多东西无法挽留，比如走远的时光，比如枯萎的情感;总有很多东西难以割舍，比如追逐的梦想，比如心中的喜爱;面对前进道路上的未知因素，
+                路走不通的时候，不要眷恋前面的风景，不要回望来时的行程;简单做自己，总有一扇门为梦想打开。</p>
+			<p>世上没有一件工作不辛苦，没有一处人事不复杂。如果命中注定是打工，便打好它。别把青春葬送，你在家跷二郎腿，青春也一样葬送，光阴不会过得慢点。有些人是不必工作的但那不是你，反正都要做了，何不快乐一点去做？
+只有当你得不到的时候，你才很容易认为那得不到的一定是最幸福的事，然而幸福本身却并非与此有关。幸福的选择在于，你对自己的满意程度是多少，而不是别人对你的满意程度是多少。</p>
+<p>我们一直寻找的，却是自己原本早已拥有的;我们总是东张西望，唯独漏了自己想要的，这就是我们至今难以如愿以偿的原因。</p>
+			
+		</div>
+	<div class="main-footer">
+		<footer>
+			<div>Coptright@2017格莱科技保留公司所有权利</div>
+			<div>
+					关于我们|
+					联系我们|
+					网站地图|
+					获取统计|
+			</div>
+		</footer>
+	</div>-->
+	<template id="mymain">
+		<div class="main">
+			<p>总想第一眼便能看穿，第一人恋人就能是一生。我们追逐太急，生命总是开着各种玩笑，错过就不要在追忆。只要心里有爱，去追，去拼，去远方。
+                年轻的我们总有很多东西无法挽留，比如走远的时光，比如枯萎的情感;总有很多东西难以割舍，比如追逐的梦想，比如心中的喜爱;面对前进道路上的未知因素，
+                路走不通的时候，不要眷恋前面的风景，不要回望来时的行程;简单做自己，总有一扇门为梦想打开。</p>
+			<p>世上没有一件工作不辛苦，没有一处人事不复杂。如果命中注定是打工，便打好它。别把青春葬送，你在家跷二郎腿，青春也一样葬送，光阴不会过得慢点。有些人是不必工作的但那不是你，反正都要做了，何不快乐一点去做？
+只有当你得不到的时候，你才很容易认为那得不到的一定是最幸福的事，然而幸福本身却并非与此有关。幸福的选择在于，你对自己的满意程度是多少，而不是别人对你的满意程度是多少。</p>
+<p>我们一直寻找的，却是自己原本早已拥有的;我们总是东张西望，唯独漏了自己想要的，这就是我们至今难以如愿以偿的原因。</p>
+			</div>
+	</template>
+	<template id="my-server">
+		<div class="main">
+			<p>564654654</p>
+			</div>
+	</template>
+	<template id="my-user">
+		<div class="main">
+		<p>defrgthyjuk</p>
+			</div>
+	</template>
+	<template id="my-our">
+		<div class="main">
+		<p>qsadesgdhghk</p>
+			</div>
+	</template>
+	<template id="my-center">
+		<div class="main">
+			<p>dfrgthfjgk</p>
+			
+			</div>
+	</template>
+	<template id="my-call">
+		<div class="main">
+			<p>sfdg446546654</p>
+			</div>
+	</template>
+<template id="footer">
+		<div class="footer">       
+			<div v-for="bb in footer">{{bb}}</div>        
+		</div>
+	</template>		
+		
+		
+		
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+		var vm=new Vue({
+			el:"#app",
+			data:{
+			 goodslist:[
+			 	{name:"",lists:{logo:true}},
+			 	{name:"网站首页",lists:{li:true,active:true}},
+			 	{name:"服务范围",lists:{li:true,active:false}},
+			 	{name:"客户案例",lists:{li:true,active:false}},
+			 	{name:"关于我们",lists:{li:true,active:false}},
+			 	{name:"咨询中心",lists:{li:true,active:false}},
+			 	{name:"联系我们",lists:{li:true,active:false}}
+			 ],
+			 footer:['Copyright © 2017 格莱科技 保留公司所有权利。','关于我们 | 联系我们 | 网站地图 | 格莱统计'],
+			 come:"mained",
+			},
+		    methods:{
+		    	getcomname:function(name){
+					this.come=name
+				}
+		    },
+			components:{
+				'my-zujian':{
+					template:"#age",
+					 data:function(){
+					 	return{
+					 		comnamelist:["mained","my-server","my-user","my-ours","my-center","my-call"]
+					 	}
+					 },
+					props:["goodslist"],
+					methods:{
+						change:function(index){
+							if(index!=0){
+								for(var i=1;i<this.goodslist.length;i++){
+									this.goodslist[i].lists="";
+								}
+								this.goodslist[index].lists="active";
+								this.$emit("getcom",this.comnamelist[index-1])
+							}
+						}
+					}
+				},
+				'mained':{
+					template:"#mymain",
+				},
+				"my-server":{
+					template:"#my-server"
+				},
+				"my-user":{
+					template:"#my-user"
+				},
+				"my-ours":{
+					template:"#my-our"
+				},
+				"my-center":{
+					template:"#my-center"
+				},
+				"my-call":{
+					template:"#my-call"
+				},
+				'myfooter':{
+					template:"#footer",
+					props:["footer"]
+				},
+			
+			}
+		})
+	</script>
+</html>

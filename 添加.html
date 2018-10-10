@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#app{
+				width: 660px;
+				height: 450px;
+				margin: 0 auto;
+			}
+			#infor{
+				padding: 10px;
+				border: 1px solid burlywood;
+				line-height: 30px;
+				height: 300px;
+			}
+			#infor input{
+				width: 300px;
+				lighting-color: 20px;
+				margin-top: 20px;
+				height: 30px;
+			}
+			
+			#infor button{
+				margin-left: 40px;
+				width: 80px;
+				height: 40px;
+				margin-top: 10px;
+			}
+			#sex{
+				width: 100px;
+				height: 30px;
+				margin-top: 10px;
+			}
+			#table{
+				width: 660px;
+				text-align: center;
+				margin-top: 30px;
+			}
+			#table th{
+				/*border: 1px solid red;*/
+				height: 40px;
+				background: burlywood;
+			}
+			#table td{
+				height: 40px;
+			
+			}
+			#table tr:nth-child(odd){
+				background: burlywood;
+			}
+			#table tr:nth-child(even){
+				background: lightskyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="infor">
+				<h3>登录系统</h3>
+			<div id="content">
+				<label for="name">姓名</label>
+					<input type="text" id="name" value="" v-model="use.name"/><br />
+				<label for="age">年龄</label>
+					<input type="text" id="age" value="" v-model="use.age" /><br />
+				<label for="sex">性别</label>
+					<select id="sex" v-model="use.sex">
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select><br />
+				<label for="tel">电话</label>
+					<input type="text" id="tel" value="" v-model="use.tel" /><br />
+			</div>
+			<button  @click="add">增加</button>
+			</div>
+			<table  id="table">
+				<tr>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>性别</th>
+					<th>手机号</th>
+					<th>类型</th>
+				</tr>
+				<tr v-for="(a,index) in has">
+					<td>{{a.name}}</td>
+					<td>{{a.age}}</td>
+					<td>{{a.sex}}</td>
+					<td>{{a.tel}}</td>
+					<td><button @click="del(index)">删除</button></td>
+				</tr>
+			</table>
+		</div>
+		
+		
+		
+<script type="text/javascript" src="js/vue.js" ></script>
+		<script>
+			var vm=new Vue({
+				el:"#app",
+				data:{
+				   use:{
+						name:"",
+						age:"",
+						sex:"",
+						tel:""
+					},
+					has:[]	
+				},
+				methods:{
+					add:function(){
+						this.has.push(this.use)
+						this.use={name:"",age:"",sex:"",tel:""}
+					},
+					del:function(index){
+						this.has.splice(index,1)
+			}	
+		}
+	})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#app{
+				width: 980px;
+				margin: 0 auto;
+			}
+			table{
+				width: 980px;
+			}
+			#tableheader{
+				height:30px;
+				background: gray;
+			}
+			#tableheader th{
+				padding:10px;
+				
+			}
+			#tablemain td{
+				padding:20px;
+			}
+			/*#tablemain input:nth-child(2){
+				height: 20px;
+				width: 20px;
+			}
+			*/
+			img{
+				width: 60px;
+				height: 60px;
+			}
+			#footer{
+				background: darkgrey;
+				font-size: 16px;
+				height: 50px;
+				margin-top:220px;
+			}
+			#footer div{
+				float: left;
+				margin-left: 20px;
+			}
+			#footer div:nth-child(1){
+				margin-left: 30px;
+				padding: 15px;
+			}
+			#footer div:nth-child(2){
+				padding: 15px;
+				margin-left: 90px;
+			}
+			#footer div:nth-child(3){
+				margin-left: 300px;
+				padding: 15px;
+				color: red;
+			}
+			#footer div:nth-child(4){
+				float: right;
+				
+			}
+			#footer button{
+				width: 100px;
+				height: 50px;
+				border: none;
+				background: red;
+			}
+			span{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<table  id="table" cellspacing="0" cellpadding="0">
+				<tr id="tableheader">
+					<th><input type="checkbox"  v-model="allcheck" @click="getallcheck"/>全选</th>
+					<th>商品名称</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>小计</th>
+					<th>操作</th>
+				</tr>
+				<tr id="tablemain" v-for="(goods,index) in goodslist">
+					<td><input type="checkbox" name="" id="" value="" v-model="goods.checked"/><img :src="goods.img"/></td>
+					<td>{{goods.name}}</td>
+					<td >￥{{goods.price}}</td>
+					<td ><button id="jian" @click="jian(index)">-</button><input type=""  v-model="goods.num"/><button @click="add(index)" id="add">+</button></td>
+					<td >￥{{goods.goodstotal}}</td>
+					<td><button id="del" @click="del(index)">删除</button></td>
+					
+				</tr>
+				
+				
+			</table>
+			
+			<footer  id="footer" >
+				<div>删除选中商品</div>
+				<div>已选择<span>{{totalnum}}</span>件商品</div>
+				<div>总价:￥{{totalprice}}</div>
+				<div><button>去结算</button></div>
+			</footer>
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="js/vue.js" ></script>
+	<script>
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				goodslist:[
+				{
+					checked:true,
+					img:"img/2b932ae8.jpg",
+					name:"AOC23英寸IPS显示器",
+					price:150,
+					num:1,
+					goodstotal:150
+				},
+				{
+					checked:false,
+					name:"AOC23英寸IPS显示器",
+					img:"img/2b932ae8.jpg",
+					price:230,
+					num:1,
+					goodstotal:230
+				},
+				{
+					checked:false,
+					name:"AOC23英寸IPS显示器",
+					img:"img/2b932ae8.jpg",
+					price:400,
+					num:1,
+					goodstotal:400
+				}
+				],
+				allcheck:false,
+			},
+			methods:{
+				jian:function(index){
+				if(this.goodslist[index].num>0){
+				 this.goodslist[index].num--
+				}
+				this.goodslist[index].goodstotal=this.goodslist[index].num*this.goodslist[index].price
+				},
+				
+				add:function(index){
+					this.goodslist[index].num++
+					this.goodslist[index].goodstotal=this.goodslist[index].num*this.goodslist[index].price
+				},
+				
+				del:function(index){
+					this.goodslist.splice(index,1)
+			},
+			
+			getallcheck:function(){
+					if(!this.allcheck){
+						for(var i=0;i<this.goodslist.length;i++){
+							this.goodslist[i].checked=true
+						}
+					}else{
+						for(var i=0;i<this.goodslist.length;i++){
+							this.goodslist[i].checked=false
+						}
+					}
+				}
+			},
+			computed:{
+				totalnum:function(){
+					var num=0;
+					for(var i=0;i<this.goodslist.length;i++){
+						if(this.goodslist[i].checked){
+							num++
+						}
+					}
+					return num
+				},
+				totalprice:function(){
+					var price=0;
+					for(var i=0;i<this.goodslist.length;i++){
+						if(this.goodslist[i].checked){
+							price+=this.goodslist[i].goodstotal
+						}
+					}
+					return price
+				}
+			},
+			watch:{
+				goodslist:{
+					handler(){
+						for(var i=0;i<this.goodslist.length;i++){
+							if(this.goodslist[0].checked&&this.goodslist[1].checked&&this.goodslist[2].checked){
+								this.allcheck=true								
+								
+							}else{
+								this.allcheck=false	
+							}
+						}
+					},deep:true 
+				}
+			}
+			
+		})
+	</script>
+</html>

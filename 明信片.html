@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			.wrap{
+				width: 380px;
+				height: 160px;
+				border: 1px solid black;
+				border-radius: 5px;
+				background: #FCFCFC url(img/logo.png) 280px 40px no-repeat; 		
+				padding: 20px;
+				margin: 10px 0 0 10px;
+				transition: all 0.5s;
+				cursor: pointer;
+			}
+			.wrap p{
+				line-height: 32px;
+				font-size: 14px;
+			}
+			.tip{
+				border: 1px dashed #999;
+				margin-top: 35px;
+				text-align: center;
+				color: #999!important;
+			}
+			.light{
+				background: #001C39 url(img/logo.png) 280px 40px no-repeat; 		
+			}
+			.light p,.light h2{
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div v-for="person in personlist">
+				<my-component :data="person"></my-component>
+			</div>
+		</div>
+		<template id="cardteam">
+			<div :class="classname" @click="changge">
+		<h2>{{data.name}}（{{data.zhiwei}}）</h2>
+				<p>{{data.company}}</p>
+				<p>{{data.email}}|{{data.birdate}}</p>
+				<p class="tip" v-show="tipshow">你选择了{{data.name}}{{data.zhiwei}}</p>
+			</div>
+			</template>
+	</body>
+<script type="text/javascript" src="js/vue.js" ></script>
+<script>
+	var vm=new Vue({
+		el:"#app",
+		data:{
+			personlist:[
+			 {
+			name:"小格",
+			zhiwei:"总监",
+			company:"龙达科技有限公司",
+			email:"xiaoge@glkjjt.com",
+			bridate:"01/20/18",
+			 },{
+			name:"小格",
+			zhiwei:"监督部长",
+			company:"腾龙科技有限公司",
+			email:"lailai@glkjjt.com",
+			bridate:"03/15/18",
+			 },{
+			name:"小格",
+			zhiwei:"部长",
+			company:"酷睿科技有限公司",
+			email:"xiaoxiaolai@glkjjt.com",
+			bridate:"08/10/18",
+			 } 
+			]
+		},
+		
+		components:{
+				"my-component":{
+					data:function(){
+						return {
+							classname:{
+								wrap:true, 
+								light:false
+							},
+							tipshow:false
+						}
+					},
+					template:"#cardteam",
+					props:["data"],
+					methods:{
+						changge:function(){
+							if(this.classname.light==false){
+								this.classname.light=true
+							}else{
+								this.classname.light=false
+							}
+							if(this.tipshow==false){
+								this.tipshow=true
+							}else{
+								this.tipshow=false
+							}
+						}
+						
+					}
+					
+					
+					
+				}
+			}
+
+			
+	})
+</script>
+</html>
